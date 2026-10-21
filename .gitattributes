@@ -1,20 +1,20 @@
-# Unity .gitattributes Template
-# Source: https://github.com/gitattributes/gitattributes/blob/master/Unity.gitattributes
-# Last synced: 2026-02-04
-# License: MIT
-#
-# This template is maintained from the gitattributes/gitattributes repository
-# and distributed under MIT License.
-
-# Define macros (only works in top-level gitattributes files)
+# ==========================================
+# Custom Attribute Macros
+# ==========================================
 [attr]lfs               filter=lfs diff=lfs merge=lfs -text
 [attr]unity-json        eol=lf linguist-language=json
 [attr]unity-yaml        merge=unityyamlmerge eol=lf linguist-language=yaml
 
-# Optionally collapse Unity YAML files on GitHub diffs
-# [attr]unity-yaml        merge=unityyamlmerge text linguist-language=yaml linguist-generated
 
-# Unity source files
+# ==========================================
+# Global Defaults & Line Ending Normalization
+# ==========================================
+* text=auto eol=lf
+
+
+# ==========================================
+# Unity Source & Shader Files
+# ==========================================
 *.cginc                 text
 *.compute               text linguist-language=hlsl
 *.cs                    text diff=csharp
@@ -22,7 +22,10 @@
 *.raytrace              text linguist-language=hlsl
 *.shader                text
 
-# Unity JSON files
+
+# ==========================================
+# Unity JSON & Metadata Files
+# ==========================================
 *.asmdef                unity-json
 *.asmref                unity-json
 *.index                 unity-json
@@ -30,12 +33,18 @@
 *.shadergraph           unity-json
 *.shadersubgraph        unity-json
 
-# Unity UI Toolkit files
+
+# ==========================================
+# Unity UI Toolkit Files
+# ==========================================
 *.tss                   text diff=css linguist-language=css
 *.uss                   text diff=css linguist-language=css
 *.uxml                  text linguist-language=xml linguist-detectable
 
-# Unity YAML files
+
+# ==========================================
+# Unity YAML Files (Scene & Prefab Merging)
+# ==========================================
 *.anim                  unity-yaml
 *.asset                 unity-yaml
 *.brush                 unity-yaml
@@ -61,20 +70,34 @@
 *.spriteatlasv2         unity-yaml
 *.terrainlayer          unity-yaml
 *.unity                 unity-yaml
-
-# "physic" for 3D but "physics" for 2D
 *.physicMaterial        unity-yaml
 *.physicsMaterial2D     unity-yaml
 
-# Exclude from GitHub stats and diffs: third-party plugins, packages lock file
-Assets/Plugins/**           linguist-generated
-Packages/packages-lock.json linguist-generated
 
-# Unity LFS
-*.cubemap               lfs
+# ==========================================
+# Source Code & Documentation Text Files
+# ==========================================
+*.md                    text
+*.txt                   text
+*.json                  text
+*.yml                   text
+*.yaml                  text
+
+
+# ==========================================
+# Git LFS Tracked Assets
+# ==========================================
+# Unity Packages & Archives
 *.unitypackage          lfs
+*.cubemap               lfs
+*.7z                    lfs
+*.bz2                   lfs
+*.gz                    lfs
+*.rar                   lfs
+*.tar                   lfs
+*.zip                   lfs
 
-# 3D models
+# 3D Model Assets
 *.3dm                   lfs
 *.3ds                   lfs
 *.blend                 lfs
@@ -97,29 +120,7 @@ Packages/packages-lock.json linguist-generated
 *.stl                   lfs
 *.ztl                   lfs
 
-# Audio
-*.aif                   lfs
-*.aiff                  lfs
-*.it                    lfs
-*.mod                   lfs
-*.mp3                   lfs
-*.ogg                   lfs
-*.s3m                   lfs
-*.wav                   lfs
-*.xm                    lfs
-
-# Video
-*.asf                   lfs
-*.avi                   lfs
-*.flv                   lfs
-*.mov                   lfs
-*.mp4                   lfs
-*.mpeg                  lfs
-*.mpg                   lfs
-*.ogv                   lfs
-*.wmv                   lfs
-
-# Images
+# Image Assets
 *.bmp                   lfs
 *.exr                   lfs
 *.gif                   lfs
@@ -135,37 +136,52 @@ Packages/packages-lock.json linguist-generated
 *.tiff                  lfs
 *.webp                  lfs
 
-# Compressed Archive
-*.7z                    lfs
-*.bz2                   lfs
-*.gz                    lfs
-*.rar                   lfs
-*.tar                   lfs
-*.zip                   lfs
+# Audio Assets
+*.aif                   lfs
+*.aiff                  lfs
+*.it                    lfs
+*.mod                   lfs
+*.mp3                   lfs
+*.ogg                   lfs
+*.s3m                   lfs
+*.wav                   lfs
+*.xm                    lfs
 
-# Compiled Dynamic Library
-*.dll                   lfs
-*.pdb                   lfs
-*.so                    lfs
+# Video Assets
+*.asf                   lfs
+*.avi                   lfs
+*.flv                   lfs
+*.mov                   lfs
+*.mp4                   lfs
+*.mpeg                  lfs
+*.mpg                   lfs
+*.ogv                   lfs
+*.wmv                   lfs
 
-# Fonts
+# Font Assets
 *.otf                   lfs
 *.ttf                   lfs
 
-# Executable/Installer
-*.apk                   lfs
+# Compiled Libraries & Binaries
+*.dll                   lfs
+*.pdb                   lfs
+*.so                    lfs
+*.a                     lfs
 *.exe                   lfs
 
-# Documents
+# Documents & Specialty Exports
 *.pdf                   lfs
-
-# ETC
-*.a                     lfs
 *.reason                lfs
 *.rns                   lfs
-
-# Spine export file for Unity
 *.skel.bytes            lfs
 
-# Exceptions for .asset files such as lightning pre-baking
-LightingData.asset     binary
+
+# ==========================================
+# Exceptions & Exclusions
+# ==========================================
+# Specific file exceptions
+LightingData.asset      binary
+
+# Exclude from GitHub stats and Linguist diffs
+Assets/Plugins/**           linguist-generated
+Packages/packages-lock.json linguist-generated
